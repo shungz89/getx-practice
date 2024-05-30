@@ -4,9 +4,9 @@ import '../../../../constants/colors.dart';
 import 'info_tab_controller.dart';
 
 class InfoTab extends GetWidget<InfoTabController> {
-   InfoTab({Key? key}) : super(key: key);
+  InfoTab({Key? key}) : super(key: key);
 
-   @override
+  @override
   String? get tag => Get.arguments['tag'];
 
   @override
@@ -19,30 +19,34 @@ class InfoTab extends GetWidget<InfoTabController> {
           // constraints: BoxConstraints(
           //   minHeight: Get.height,
           // ),
-          child: Obx(
-                () => Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 15,
-                ),
-                _infoResultWidget(),
-              ],
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 15,
+              ),
+              _infoResultWidget(),
+            ],
           ),
         ),
       ),
     );
   }
 
-
   Widget _infoResultWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-       // Container()
-       //      : const Text("No Data", style: TextStyle(color: AppColors.white),),
+        TextButton(
+          onPressed: () {
+            Get.offNamedUntil("/", (route) => false);
+          },
+          child: const Text("Fetch Data"),
+        ),
+
+        // Container()
+        //      : const Text("No Data", style: TextStyle(color: AppColors.white),),
       ],
     );
   }

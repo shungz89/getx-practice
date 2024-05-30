@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:getx_as_sj/routes/app_pages.dart';
 import 'package:getx_as_sj/routes/app_routes.dart';
@@ -65,7 +66,10 @@ class App extends StatelessWidget {
       locale: Locale(savedLocalString),
       fallbackLocale: TranslationService.fallbackLocale,
       translations: TranslationService(),
-      builder: EasyLoading.init(),
+      builder: (context, child) {
+        FToastBuilder();
+        return FlutterEasyLoading(child: child!);
+      },
     );
   }
 }

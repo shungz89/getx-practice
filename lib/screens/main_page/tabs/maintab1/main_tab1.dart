@@ -43,7 +43,8 @@ class MainTab1 extends GetView<MainTab1Controller> {
                   itemBuilder: (context, index) {
                     return UserItemWidget(controller.userList[index],
                         onTap: () {
-                        });
+                      controller.goToDetailsPage(controller.userList[index]);
+                    });
                   },
                 )
               : SizedBox.shrink(),

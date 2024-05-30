@@ -137,7 +137,6 @@ class DetailsController extends GetxController
 
   @override
   void onClose() async {
-    tabController.dispose();
     if (refreshAnimationController != null) {
       refreshAnimationController!.dispose();
     }

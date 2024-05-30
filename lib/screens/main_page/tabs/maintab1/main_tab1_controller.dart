@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_as_sj/models/request/get_some_list_request.dart';
 import 'package:getx_as_sj/models/result/get_user_list_result.dart';
+import 'package:getx_as_sj/routes/app_pages.dart';
+import 'package:getx_as_sj/routes/app_routes.dart';
 
 import '../../../../api/api_repository.dart';
 import '../../../../models/some_object.dart';
+import '../../../../widgets/common_widget.dart';
 
 class MainTab1Controller extends GetxController {
   RxList<GetUserListResult> userList = <GetUserListResult>[].obs;
@@ -23,6 +26,7 @@ class MainTab1Controller extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     await getUserList();
+    CommonWidget.toast("Init Complete");
   }
 
   @override
@@ -42,5 +46,12 @@ class MainTab1Controller extends GetxController {
         }
       });
     }
+  }
+
+  void goToDetailsPage(GetUserListResult user) {
+    Get.toNamed(AppRoutes.DETAILS, arguments: {
+      'user': user,
+      'tag': "${DateTime.now().millisecondsSinceEpoch}"
+    });
   }
 }
