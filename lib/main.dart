@@ -17,8 +17,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'di.dart';
 import 'lang/translation_service.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -35,7 +33,7 @@ void main() async {
   configLoading();
   initializeDateFormatting().then((value) async {
     ///Hardcode to en_US
-    String savedLocalString =  "en_US";
+    String savedLocalString = "en_US";
     runApp(App(savedLocalString: savedLocalString));
   });
 }
@@ -44,6 +42,7 @@ class App extends StatelessWidget {
   App({super.key, required this.savedLocalString});
 
   String savedLocalString;
+  static GlobalKey<ScaffoldState> scaffoldMessengerKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +65,11 @@ class App extends StatelessWidget {
       locale: Locale(savedLocalString),
       fallbackLocale: TranslationService.fallbackLocale,
       translations: TranslationService(),
+      // scaffoldMessengerKey: scaffoldKey,
       builder: (context, child) {
         FToastBuilder();
-        return FlutterEasyLoading(child: child!);
+        return Scaffold(
+            key: scaffoldMessengerKey, body: FlutterEasyLoading(child: child!));
       },
     );
   }
@@ -77,7 +78,7 @@ class App extends StatelessWidget {
 void configLoading() {
   EasyLoading.instance
 
-  /// Overlay
+    /// Overlay
     ..maskType = EasyLoadingMaskType.custom
     ..maskColor = Colors.black.withOpacity(0.5)
     ..indicatorWidget = Image.asset(
@@ -85,19 +86,17 @@ void configLoading() {
       width: 50,
       height: 50,
     )
-  // ..indicatorType = EasyLoadingIndicatorType.threeBounce
+    // ..indicatorType = EasyLoadingIndicatorType.threeBounce
     ..loadingStyle = EasyLoadingStyle.custom
-  // ..indicatorSize = 45.0
+    // ..indicatorSize = 45.0
     ..radius = 10.0
-  // ..progressColor = Colors.yellow
+    // ..progressColor = Colors.yellow
     ..backgroundColor = AppColors.transparent
     ..boxShadow = <BoxShadow>[]
     ..indicatorColor = Colors.red
     ..textColor = Colors.green
-  // ..maskColor = Colors.red
+    // ..maskColor = Colors.red
     ..userInteractions = false
     ..dismissOnTap = false
     ..animationStyle = EasyLoadingAnimationStyle.scale;
 }
-
-
